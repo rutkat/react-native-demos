@@ -1,19 +1,15 @@
 import { WebView } from 'react-native-webview';
-import Constants from 'expo-constants';
-import { StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 
 export default function App() {
+
+  const srcURI = Platform.OS !== 'web' ? 'https://expo.dev' : '<iframe width="100%" height="50%" src="https://expo.dev" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'; 
+  
   return (
     <WebView
-      style={styles.container}
-      source={{ uri: 'https://expo.dev' }}
+      originWhitelist={['*']} 
+      source={{uri: srcURI }}
+      style={{marginTop: 20}}
     />
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  },
-});
